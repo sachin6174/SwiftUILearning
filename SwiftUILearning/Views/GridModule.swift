@@ -8,8 +8,33 @@
 import SwiftUI
 
 struct GridModule: View {
+    
+    let columns: [GridItem] = [
+//        .init(.fixed(200)),
+//        .init(.adaptive(minimum: 50, maximum: 60)),
+//        .init(.flexible(minimum: 300, maximum: 400)),
+//        .init(),
+        .init(.flexible(),spacing: 1),
+        .init(.flexible(),spacing: 1),
+        .init(.flexible(),spacing: 1)
+//        .init()
+    ]
+    
+    let dimension = (UIScreen.main.bounds.width/3)
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ScrollView{
+            LazyVGrid (columns: columns ,spacing : 1){
+                ForEach( 0 ... 50 ,id : \.self){item  in
+                    ZStack{
+                        Rectangle()
+                            .frame(height: dimension)
+                        Text("hello \(item)")
+                            .colorInvert()
+                    }
+                }
+            }
+        }
     }
 }
 
