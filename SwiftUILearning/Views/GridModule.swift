@@ -20,20 +20,35 @@ struct GridModule: View {
 //        .init()
     ]
     
-    let dimension = (UIScreen.main.bounds.width/3)
+    
+    let foodImages : [String] = [
+        "pizza1",
+        "pizza2",
+        "burger1",
+        "samosa1",
+        "paneer1"
+    ]
+    
+    let dimension = (UIScreen.main.bounds.width/3) - 2  // subtracting 2 when we add 1 pixel of spacing on each horizontal edge
     
     var body: some View {
         ScrollView{
             LazyVGrid (columns: columns ,spacing : 1){
-                ForEach( 0 ... 50 ,id : \.self){item  in
+                ForEach( foodImages ,id : \.self){image  in
                     ZStack{
-                        Rectangle()
-                            .frame(height: dimension)
-                        Text("hello \(item)")
-                            .colorInvert()
+//                        Rectangle()
+//                            .frame(height: dimension)
+//                        Text("hello \(item)")
+//                            .colorInvert()
+                        Image(image)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: dimension, height: dimension)
+                            .clipShape(Rectangle())
                     }
                 }
             }
+            .padding(.horizontal,2)
         }
     }
 }
